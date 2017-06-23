@@ -14,14 +14,19 @@
 uniform.frog.sex.ratio.setup <- function(n, ratio, pondsize, fixed, seed.x, seed.y) {
   # ratio is percentage of females
   # Sets up dataframe of simfrogs
+  buffer <- 3
   if(fixed == F) {
-    x <- sample(c(0:pondsize), n, replace = T)
-    y <- sample(c(0:pondsize), n, replace = T)
+    weight <- (buffer - 0)/((buffer - 0) + (pondsize - (pondsize-buffer)))
+    which_region <- rbinom(n, 1, prob = weight)
+    x <- runif(n, ifelse(which_region, 0, (pondsize-buffer)), ifelse(which_region, buffer, pondsize))
+    y <- runif(n, ifelse(which_region, 0, (pondsize-buffer)), ifelse(which_region, buffer, pondsize))
   } else {
+    weight <- (buffer - 0)/((buffer - 0) + (pondsize - (pondsize-buffer)))
+    which_region <- rbinom(n, 1, prob = weight)
     set.seed(seed.x)
-    x <- sample(c(0:pondsize), n, replace = T)
+    x <- runif(n, ifelse(which_region, 0, (pondsize-buffer)), ifelse(which_region, buffer, pondsize))
     set.seed(seed.y)
-    y <- sample(c(0:pondsize), n, replace = T)
+    y <- runif(n, ifelse(which_region, 0, (pondsize-buffer)), ifelse(which_region, buffer, pondsize))
   }
   df <- as.data.frame(cbind(x,y))
   names(df) <- c("x", "y")
