@@ -1,0 +1,17 @@
+Package: frogsim
+Type: Package
+Title: Simulating Frog Communication Networks
+Version: 0.1.0
+Author: Danielle V. Nelson
+Maintainer: Danielle V. Nelson <daniellevnelson@gmail.com>
+Description: This package simulates frog communication networks according to observations detailed in Nelson et al (2017). 
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
+Imports:
+    reshape2,
+    plotrix,
+    mefa,
+    network,
+    dplyr
+RoxygenNote: 6.0.1.9000
