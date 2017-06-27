@@ -35,7 +35,7 @@ matrixify <- function(df, noiselevel) {
       }
     }
     # turn this back into an adj. matrix
-    df <- dcast(edgelist, id.1 ~ id.2, value.var = "value")
+    df <- reshape2::dcast(edgelist, id.1 ~ id.2, value.var = "value")
     df
   }
   adj.matrix.init <- adjust.matrix(df, noiselevel)
