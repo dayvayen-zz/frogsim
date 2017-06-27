@@ -19,9 +19,9 @@ generate.uniform.frogs <- function(n, ratio, pondsize, temp, noiselevel, fixed, 
   df <- uniform.frog.sex.ratio.setup(n, ratio, pondsize, fixed, seed.x, seed.y)
   adj.matrix <- matrixify(df, noiselevel)
   g <- make.network(df, adj.matrix, temp, noiselevel)
-  g %v% "sex" <- df$sex
-  g %v% "x.coord" <- df$x
-  g %v% "y.coord" <- df$y
+  network::set.vertex.attribute(g, "sex", df$sex)
+  network::set.vertex.attribute(g, "x.coord", df$x)
+  network::set.vertex.attribute(g, "y.coord", df$y)
   network::set.network.attribute(g, "sex ratio", ratio)
   g
 }

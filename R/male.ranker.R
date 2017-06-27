@@ -29,15 +29,15 @@ male.ranker <- function(g) {
     df$atl.na <- NULL
     df
   }
-  test <- g %v% "sex" == "f"
-  max.males <- g %n% "max male frogs"
-  temperature <- g %n% "temperature"
-  sex.ratio <- g %n% "sex ratio"
-  x.coord <- g %v% "x.coord"
-  y.coord <- g %v% "y.coord"
-  sex <- g %v% "sex"
-  noiselevel <- g %n% "noise level"
-  node.id <- as.data.frame(cbind(g %v% "vertex.names", sex))
+  test <- network::get.vertex.attribute(g, "sex") == "f"
+  max.males <- network::get.network.attribute(g, "max male frogs")
+  temperature <- network::get.network.attribute(g, "temperature")
+  sex.ratio <- network::get.network.attribute(g, "sex ratio")
+  x.coord <- network::get.vertex.attribute(g, "x.coord")
+  y.coord <- network::get.vertex.attribute(g, "y.coord")
+  sex <- network::get.vertex.attribute(g, "sex")
+  noiselevel <- network::get.network.attribute(g, "noise level")
+  node.id <- as.data.frame(cbind(get.vertex.attribute(g, "vertex.names"), sex))
   names(node.id) <- c("id", "sex")
   node.id$id <- as.numeric(as.character(node.id$id))
   females <- node.id[test,]
@@ -48,16 +48,16 @@ male.ranker <- function(g) {
   }
   new.edgelist <- do.call(rbind, datalist)
   new.edgelist.no.zero <- dplyr::filter(new.edgelist, value > 0)
-  g.new <- network.initialize(network.size(g), directed = F)
-  network.vertex.names(g.new) <- network.vertex.names(g)
+  g.new <- network::network.initialize(network.size(g), directed = F)
+  network::network.vertex.names(g.new) <- network::network.vertex.names(g)
   g.new[as.matrix(new.edgelist.no.zero)] <- 1
-  set.edge.value(g.new, "value", new.edgelist.no.zero$value)
-  g.new %v% "sex" <- sex
-  g.new %v% "x.coord" <- x.coord
-  g.new %v% "y.coord" <- y.coord
-  set.network.attribute(g.new, "max male frogs", max.males)
-  set.network.attribute(g.new, "temperature", temperature)
-  set.network.attribute(g.new, "sex ratio", sex.ratio)
-  set.network.attribute(g.new, "noise level", noiselevel)
+  network::set.edge.value(g.new, "value", new.edgelist.no.zero$value)
+  network::set.vertex.attribute(g.new, "sex", sex)
+  network::set.vertex.attribute(g.new,"x.coord", x.coord)
+  network::set.vertex.attribute(g.new, "y.coord", y.coord)
+  network::set.network.attribute(g.new, "max male frogs", max.males)
+  network::set.network.attribute(g.new, "temperature", temperature)
+  network::set.network.attribute(g.new, "sex ratio", sex.ratio)
+  network::set.network.attribute(g.new, "noise level", noiselevel)
   g.new
 }
