@@ -26,6 +26,6 @@ generate.input.data <- function(n = 30,
   input.data <- expand.grid(n, ratio, pondsize, fixed, seed.x, seed.y, temp, noiselevel)
   names(input.data) <- c("n", "ratio", "pondsize", "fixed", "seed.x", "seed.y", "temp", "noiselevel")
   input.data <- mefa:::rep.data.frame(input.data, times = replicate)
-  input.data.list <- split(input.data, rep(1:replicate, each = nrow(input.data) / replicate))
+  input.data.list <- split(input.data, seq(nrow(input.data)))
   input.data.list
 }
