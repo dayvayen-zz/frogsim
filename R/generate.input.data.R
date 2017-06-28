@@ -17,14 +17,14 @@
 generate.input.data <- function(n = 30,
                                 ratio = (seq(from=.1, to = .9, by = 0.1)),
                                 pondsize = 30,
-                                temp = 10,
-                                noiselevel = 28,
                                 fixed = F,
                                 seed.x = 500,
                                 seed.y = 600,
+                                temp = 10,
+                                noiselevel = 28,
                                 replicate = 1) {
-  input.data <- expand.grid(n, ratio, pondsize, temp, noiselevel, fixed, seed.x, seed.y)
-  names(input.data) <- c("n", "ratio", "pondsize", "temp", "noiselevel", "fixed", "seed.x", "seed.y")
+  input.data <- expand.grid(n, ratio, pondsize, fixed, seed.x, seed.y, temp, noiselevel)
+  names(input.data) <- c("n", "ratio", "pondsize", "fixed", "seed.x", "seed.y", "temp", "noiselevel")
   input.data <- mefa:::rep.data.frame(input.data, times = replicate)
   input.data.list <- split(input.data, rep(1:replicate, each = nrow(input.data) / replicate))
   input.data.list

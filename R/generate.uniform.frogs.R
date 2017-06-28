@@ -15,7 +15,7 @@
 #' @examples
 #' generate.uniform.frogs(30, .6, 30, 10, 28, F, 500, 500)
 
-generate.uniform.frogs <- function(n, ratio, pondsize, temp, noiselevel, fixed, seed.x, seed.y) {
+generate.uniform.frogs <- function(n, ratio, pondsize, fixed, seed.x, seed.y, temp, noiselevel) {
   df <- uniform.frog.sex.ratio.setup(n, ratio, pondsize, fixed, seed.x, seed.y)
   adj.matrix <- matrixify(df, noiselevel)
   g <- make.network(df, adj.matrix, temp, noiselevel)
