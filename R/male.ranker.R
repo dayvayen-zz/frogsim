@@ -10,9 +10,9 @@ male.ranker <- function(g) {
   ranks <- function(g, node) {
     df <- as.data.frame(matrix(nrow = 1, ncol = 4))
     names(df) <- c("id.1", "id.2", "atl.na", "value")
-    if(length(get.edges(g, node)) > 0) {
-      for(i in 1:length(get.edges(g, node))) {
-        work <- unlist(get.edges(g, node)[i])
+    if(length(network::get.edges(g, node)) > 0) {
+      for(i in 1:length(network::get.edges(g, node))) {
+        work <- unlist(network::get.edges(g, node)[i])
         df[i,] <- work
       }
       df <- arrange(df, desc(value))
