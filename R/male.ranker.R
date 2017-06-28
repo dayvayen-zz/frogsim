@@ -48,7 +48,7 @@ male.ranker <- function(g) {
   }
   new.edgelist <- do.call(rbind, datalist)
   new.edgelist.no.zero <- dplyr::filter(new.edgelist, value > 0)
-  g.new <- network::network.initialize(network.size(g), directed = F)
+  g.new <- network::network.initialize(network::network.size(g), directed = F)
   network::network.vertex.names(g.new) <- network::network.vertex.names(g)
   g.new[as.matrix(new.edgelist.no.zero)] <- 1
   network::set.edge.value(g.new, "value", new.edgelist.no.zero$value)
