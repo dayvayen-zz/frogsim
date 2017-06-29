@@ -37,7 +37,7 @@ male.ranker <- function(g) {
   y.coord <- network::get.vertex.attribute(g, "y.coord")
   sex <- network::get.vertex.attribute(g, "sex")
   noiselevel <- network::get.network.attribute(g, "noise level")
-  node.id <- as.data.frame(cbind(network::get.vertex.attribute(g, "vertex.names"), sex))
+  node.id <- as.tibble(cbind(network::get.vertex.attribute(g, "vertex.names"), sex))
   names(node.id) <- c("id", "sex")
   node.id$id <- as.numeric(as.character(node.id$id))
   females <- node.id[test,]

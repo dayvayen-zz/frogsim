@@ -7,7 +7,7 @@
 #' @param seed.x numeric seed for x positions (only need if fixed == T)
 #' @param seed.y numeric seed for y positions (only need if fixed == T)
 #' @param buffer logical whether you want the frogs to be on the periphery or randomly distributed.
-#' @return a dataframe of simulated frogs following the parameters you specify.
+#' @return a tibble of simulated frogs following the parameters you specify.
 #' @export
 #' @examples
 #' uniform.frog.sex.ratio.setup(30, .5, 30, F, 300, 300)
@@ -32,8 +32,8 @@ uniform.frog.sex.ratio.setup <- function(n, ratio, pondsize, fixed, seed.x, seed
     }
   } else {
     if(fixed == F) {
-      x <- sample(c(0:pondsize), replace = T)
-      y <- sample(c(0:pondsize), replace = T)
+      x <- sample(c(0:pondsize), n, replace = T)
+      y <- sample(c(0:pondsize), n, replace = T)
     } else {
       set.seed(seed.x)
       x <- sample(c(0:pondsize), replace = T)
@@ -41,11 +41,11 @@ uniform.frog.sex.ratio.setup <- function(n, ratio, pondsize, fixed, seed.x, seed
       y <- sample(c(0:pondsize), replace = T)
     }
   }
-  df <- as.data.frame(cbind(x,y))
-  names(df) <- c("x", "y")
-  df$id <- seq(1:n)
-  df$sex <- sample(c("m", "f"), n, replace = T, prob = c(1-ratio, ratio))
-  df
+  tibs <- as.tibble(cbind(x,y))
+  names(tibs) <- c("x", "y")
+  tibs$id <- seq(1:n)
+  tibs$sex <- sample(c("m", "f"), n, replace = T, prob = c(1-ratio, ratio))
+  tibs
 }
 
 
