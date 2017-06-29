@@ -9,14 +9,15 @@
 #' @param fixed logical. set to T if fixed positions are desired
 #' @param seed.x numeric seed for when fixed == T
 #' @param seed.y numeric seed for when fixed == T
+#' @param buffer logical whether you want the frogs to be on the periphery or randomly distributed.
 #' @return network object of frogs from all above parameters
 #' @seealso \code{\link{uniform.frog.sex.ratio.setup}}, \code{\link{matrixify}}, \code{\link{make.network}}. This function is dependent on the previous functions.
 #' @export
 #' @examples
 #' generate.uniform.frogs(30, .6, 30, 10, 28, F, 500, 500)
 
-generate.uniform.frogs <- function(n, ratio, pondsize, fixed, seed.x, seed.y, temp, noiselevel) {
-  df <- uniform.frog.sex.ratio.setup(n, ratio, pondsize, fixed, seed.x, seed.y)
+generate.uniform.frogs <- function(n, ratio, pondsize, fixed, seed.x, seed.y, buffer, temp, noiselevel) {
+  df <- uniform.frog.sex.ratio.setup(n, ratio, pondsize, fixed, seed.x, seed.y, buffer)
   adj.matrix <- matrixify(df, noiselevel)
   g <- make.network(df, adj.matrix, temp, noiselevel)
   network::set.vertex.attribute(g, "sex", df$sex)

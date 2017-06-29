@@ -8,6 +8,7 @@
 #' @param fixed logical. set to T if fixed positions are desired (defaults to F)
 #' @param seed.x numeric seed for when fixed == T (defaults to 500)
 #' @param seed.y numeric seed for when fixed == T (defaults to 600)
+#' @param buffer logical whether you want the frogs to be on the periphery or randomly distributed.
 #' @param replicate numeric how many times you want each network to generate
 #' @return list of input data
 #' @export
@@ -20,11 +21,12 @@ generate.input.data <- function(n = 30,
                                 fixed = F,
                                 seed.x = 500,
                                 seed.y = 600,
+                                buffer = T,
                                 temp = 10,
                                 noiselevel = 28,
                                 replicate = 1) {
-  input.data <- expand.grid(n, ratio, pondsize, fixed, seed.x, seed.y, temp, noiselevel)
-  names(input.data) <- c("n", "ratio", "pondsize", "fixed", "seed.x", "seed.y", "temp", "noiselevel")
+  input.data <- expand.grid(n, ratio, pondsize, fixed, seed.x, seed.y, buffer, temp, noiselevel)
+  names(input.data) <- c("n", "ratio", "pondsize", "fixed", "seed.x", "seed.y", "buffer", "temp", "noiselevel")
   input.data <- mefa:::rep.data.frame(input.data, times = replicate)
   input.data.list <- split(input.data, seq(nrow(input.data)))
   input.data.list
