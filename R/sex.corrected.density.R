@@ -6,7 +6,9 @@
 
 sex.corrected.density <- function(g) {
   edgecount <- network::network.edgecount(g)
-  m.f.combo <- plyr::count(network::get.vertex.attribute(g, "sex") == "f")$freq[1] * count(network::get.vertex.attribute(g, "sex") == "f")$freq[2]
+  test <-network::get.vertex.attribute(g, "sex") == "f"
+  m.f.combo <- table(test)[1] * table(test)[2]
   sex.corrected.density <- edgecount/m.f.combo
+  names(sex.corrected.density) <- NULL
   sex.corrected.density
 }
