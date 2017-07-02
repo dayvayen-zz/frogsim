@@ -37,6 +37,7 @@ male.ranker <- function(g) {
   y.coord <- network::get.vertex.attribute(g, "y.coord")
   sex <- network::get.vertex.attribute(g, "sex")
   noiselevel <- network::get.network.attribute(g, "noise level")
+  pondsize <- network::get.network.attribute(g, "pond size")
   node.id <- as.tibble(cbind(network::get.vertex.attribute(g, "vertex.names"), sex))
   names(node.id) <- c("id", "sex")
   node.id$id <- as.numeric(as.character(node.id$id))
@@ -59,5 +60,6 @@ male.ranker <- function(g) {
   network::set.network.attribute(g.new, "temperature", temperature)
   network::set.network.attribute(g.new, "sex ratio", sex.ratio)
   network::set.network.attribute(g.new, "noise level", noiselevel)
+  network::set.network.attribute(g.new, "pond size", pondsize)
   g.new
 }

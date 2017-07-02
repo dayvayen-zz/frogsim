@@ -24,5 +24,6 @@ generate.uniform.frogs <- function(n, ratio, pondsize, fixed, seed.x, seed.y, bu
   network::set.vertex.attribute(g, "x.coord", tibs$x)
   network::set.vertex.attribute(g, "y.coord", tibs$y)
   network::set.network.attribute(g, "sex ratio", ratio)
+  network::set.network.attribute(g, "pond size", pondsize)
   g
 }
