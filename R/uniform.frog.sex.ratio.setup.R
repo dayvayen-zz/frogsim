@@ -10,7 +10,7 @@
 #' @return a tibble of simulated frogs following the parameters you specify.
 #' @export
 #' @examples
-#' uniform.frog.sex.ratio.setup(30, .5, 30, F, 300, 300)
+#' uniform.frog.sex.ratio.setup(30, .5, 30, F, 300, 300, F)
 
 uniform.frog.sex.ratio.setup <- function(n, ratio, pondsize, fixed, seed.x, seed.y, buffer) {
   # ratio is percentage of females

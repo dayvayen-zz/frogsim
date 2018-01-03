@@ -14,15 +14,18 @@
 #' @seealso \code{\link{uniform.frog.sex.ratio.setup}}, \code{\link{matrixify}}, \code{\link{make.network}}. This function is dependent on the previous functions.
 #' @export
 #' @examples
-#' generate.uniform.frogs(30, .6, 30, 10, 28, F, 500, 500)
+#' generate.uniform.frogs(30, .6, 30, F, 500, 500, F, 10, 28)
 
 generate.uniform.frogs <- function(n, ratio, pondsize, fixed, seed.x, seed.y, buffer, temp, noiselevel) {
   tibs <- uniform.frog.sex.ratio.setup(n, ratio, pondsize, fixed, seed.x, seed.y, buffer)
-  adj.matrix <- matrixify(tibs, noiselevel, temp)
+  tibs <- add.parameters(tibs, temp)
+  adj.matrix <- matrixify(tibs, noiselevel)
   g <- make.network(tibs, adj.matrix, temp, noiselevel)
   network::set.vertex.attribute(g, "sex", tibs$sex)
   network::set.vertex.attribute(g, "x.coord", tibs$x)
   network::set.vertex.attribute(g, "y.coord", tibs$y)
+  network::set.vertex.attribute(g, "frequency", tibs$frequency)
+  network::set.vertex.attribute(g, "callrate", tibs$callrate)
   network::set.network.attribute(g, "sex ratio", ratio)
   network::set.network.attribute(g, "pond size", pondsize)
   g

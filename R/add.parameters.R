@@ -1,5 +1,9 @@
-# what if instead i just made a new thing with the tibs and the df that adds in freq and callrate so you don't have to use it if you don't wanna?
-
+#' Add parameters to male frogs
+#'
+#' @param tibs a tibble
+#' @param temp temperature in degrees C (used for generating call rate)
+#' @return a tibble similar to input but with frequency and call rate for male frogs
+#' @export
 
 add.parameters <- function(tibs, temp) {
   tibs$frequency <- rnorm(nrow(tibs), mean = 2390, sd = 142)
