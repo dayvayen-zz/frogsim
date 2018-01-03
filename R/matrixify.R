@@ -6,7 +6,7 @@
 #' @seealso \code{\link{uniform.frog.sex.ratio.setup}} which this function depends on
 #' @export
 
-matrixify <- function(df, noiselevel) {
+matrixify <- function(df, noiselevel, temp) {
   # Takes df of simfrogs with xy positions, turns it into a distance matrix
   # and then makes an edgelist of it.
   adjust.matrix <- function(df, noiselevel) {
@@ -19,20 +19,25 @@ matrixify <- function(df, noiselevel) {
     adj.matrix
   }
 
-  make.edgelist <- function(adj.matrix, df) {
+  make.edgelist <- function(adj.matrix, df, temp) {
     edgelist <- reshape2::melt(adj.matrix)
     names(edgelist) <- c("id.1", "id.2", "value")
+    edgelist$frequency <-  # generate here, mean = 2390, sd = 142
+    edgelist$callrate <-  # generate here, mean = 30 + 1.6*temp, sd = 14
     edgelist$value[edgelist$value != 0] <- plotrix::rescale(edgelist$value[edgelist$value != 0], c(10,1))
+    edgelist$frequency.scaled <- plotrix::rescale(edgelist$frequency, c(10,1))
+    edgelist$callrate.scaled <- plotrix::rescale(edgelist$callrate, c(1,10))
     for(i in 1:nrow(edgelist)) {
       frog1.id <- edgelist[i,1]
       frog2.id <- edgelist[i,2]
       frog1.sex <- df[df$id == frog1.id, ]$sex
       frog2.sex <- df[df$id == frog2.id, ]$sex
       if(frog1.sex != frog2.sex) {
-        edgelist$value[i] <- edgelist$value[i]
+        edgelist$value[i] <- mean(edgelist$value[i] , edgelist$frequency.scaled[i] ,edgelist$callrate.scaled[i])
       } else {
         edgelist$value[i] <- 0
       }
+      # how do i preserve the values of the frequency and call rate to see how much influence they have?
     }
     # turn this back into an adj. matrix
     df <- reshape2::dcast(edgelist, id.1 ~ id.2, value.var = "value")

@@ -1,6 +1,6 @@
 #' Generate a bunch of input data to make a bunch of simfrog networks.
 #'
-#'@param n integer number of frogs (defaults to 30)
+#' @param n integer number of frogs (defaults to 30)
 #' @param ratio numeric sex ratio of femlaes (percentage, 0-1; defaults to sequence from .1 to .9 by .1)
 #' @param pondsize numeric length of pond edges (meters, defaults to 30)
 #' @param temp numeric ambient air temperature (Celsius, defaults to 10)

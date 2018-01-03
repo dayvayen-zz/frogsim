@@ -18,7 +18,7 @@
 
 generate.uniform.frogs <- function(n, ratio, pondsize, fixed, seed.x, seed.y, buffer, temp, noiselevel) {
   tibs <- uniform.frog.sex.ratio.setup(n, ratio, pondsize, fixed, seed.x, seed.y, buffer)
-  adj.matrix <- matrixify(tibs, noiselevel)
+  adj.matrix <- matrixify(tibs, noiselevel, temp)
   g <- make.network(tibs, adj.matrix, temp, noiselevel)
   network::set.vertex.attribute(g, "sex", tibs$sex)
   network::set.vertex.attribute(g, "x.coord", tibs$x)
